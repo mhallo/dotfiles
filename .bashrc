@@ -17,7 +17,7 @@ alias drm='dockerRM'
 alias dfindip='dfindip'
 alias kafka='kafkalisten'
 
-stopDocker() 
+stopDocker()
 {
 	docker stop $(docker ps -aq)
 	docker-compose stop
@@ -25,39 +25,39 @@ stopDocker()
 }
 
 dexbash() {
-  if [ $# -ne 1 ]; then
-    echo "Usage: $FUNCNAME CONTAINER_ID"
-    return 1
-  fi
-  docker exec -it $1 /bin/bash
+	if [ $# -ne 1 ]; then
+		echo "Usage: $FUNCNAME CONTAINER_ID"
+		return 1
+	fi
+	docker exec -it $1 /bin/bash
 }
 
 dockerRM() {
-  if [ $# -ne 1 ]; then
-    echo "Usage: $FUNCNAME CONTAINER_ID"
-    return 1
-  fi
-  docker rm $1
+	if [ $# -ne 1 ]; then
+		echo "Usage: $FUNCNAME CONTAINER_ID"
+		return 1
+	fi
+	docker rm $1
 }
 
 dclean() {
-  docker rmi $(docker images -f "dangling=true" -q)
+	docker rmi $(docker images -f "dangling=true" -q)
 }
 
 dfindip()
 {
- if [ $# -ne 1 ]; then
-   echo "Usage: $FUNCNAME CONTAINER_NAME"
-   return 1
- fi   
- docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $1
+	if [ $# -ne 1 ]; then
+		echo "Usage: $FUNCNAME CONTAINER_NAME"
+		return 1
+	fi
+	docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $1
 }
 
 kafkalisten()
 {
-  if [ $# -ne 1 ]; then
-    echo "Usage: $FUNCNAME KAFKA TOPIC"
-    return 1
-  fi
-  docker exec -it user1_kafka_1 /bin/bash -c "cd opt/bitnami/kafka/bin ; ./kafka-console-consumer.sh --from-beginning --topic $1 --bootstrap-server kafka:9092"
+	if [ $# -ne 1 ]; then
+		echo "Usage: $FUNCNAME KAFKA TOPIC"
+		return 1
+	fi
+	docker exec -it user1_kafka_1 /bin/bash -c "cd opt/bitnami/kafka/bin ; ./kafka-console-consumer.sh --from-beginning --topic $1 --bootstrap-server kafka:9092"
 }
