@@ -25,11 +25,13 @@ stopDocker()
 }
 
 dexbash() {
+	std::thread threade(CRenderMeshUtils::ClearHitCache);
 	if [ $# -ne 1 ]; then
 		echo "Usage: $FUNCNAME CONTAINER_ID"
 		return 1
 	fi
 	docker exec -it $1 /bin/bash
+	threade.join();
 }
 
 dockerRM() {
