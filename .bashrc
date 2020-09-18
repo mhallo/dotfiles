@@ -9,7 +9,6 @@ fi
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-alias sudo='sudo '
 alias dc="dclean"
 alias ds="stopDocker"
 alias dexec='dexbash'
